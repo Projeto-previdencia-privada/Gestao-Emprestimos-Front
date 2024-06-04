@@ -74,7 +74,7 @@ function Form( {select_elements, form_fields, type, onFormSubmit} ) {
         async function sendRequest() {
             const request = await fetch('http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND + '/api/v1/instituicoes', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND},
                 body: JSON.stringify(data)
             })
             return request.json();
@@ -90,6 +90,7 @@ function Form( {select_elements, form_fields, type, onFormSubmit} ) {
                     async function sendRequestImage() {
                         const request = await fetch('http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND + '/api/v1/instituicoes/'+data['cnpj']+'/imagem', {
                             method: 'PATCH',
+                            headers: {'Access-Control-Allow-Origin': 'http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND},
                             body: file.result
                         })
                     }

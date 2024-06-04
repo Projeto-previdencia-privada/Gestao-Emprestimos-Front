@@ -10,7 +10,7 @@ function UserData( {cpf} ) {
     const [dataFetched, setDataFetched] = useState(false)
 
     async function fetchData() {
-        let response = await fetch("http://" + import.meta.env.VITE_IP_MAQUINA_BACKEND + "/api/v1/emprestimos/" + cpf + "/info")
+        let response = await fetch("http://" + import.meta.env.VITE_IP_MAQUINA_BACKEND + "/api/v1/emprestimos/" + cpf + "/info", {headers: {'Access-Control-Allow-Origin': 'http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND}} )
         let data = await response.json()
         setClientInfo(data)
 
@@ -18,7 +18,7 @@ function UserData( {cpf} ) {
         data = await response.json();
         setEmprestimos(data)
 
-        response = await fetch('http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND + '/api/v1/instituicoes')
+        response = await fetch('http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND + '/api/v1/instituicoes', {headers: {'Access-Control-Allow-Origin': 'http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND}})
         data = await response.json()
         setInstituicoes(data)
     }
