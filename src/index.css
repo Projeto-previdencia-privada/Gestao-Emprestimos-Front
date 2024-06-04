@@ -19,15 +19,44 @@ html, body {
     align-items: center;
     display: flex;
     background-color: rgb(248, 248, 248);
-    height: 45vh;
+    min-height: 45vh;
 }
 
 .card .card-content {
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     background-color: white;
     height: 80%;
     width: 50%;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 6px 0px;
+    grid-template-areas:
+            "header header"
+            "sidebar content"
+
+}
+
+.card .card-content .card-header {
+    grid-area: header;
+}
+
+.card .card-content .card-renda {
+    grid-area: sidebar;
+}
+
+
+.card .card-content .card-total {
+    grid-area: content;
+}
+
+.card-content h3 {
+    font-size: 35px;
+    color: rgb(12, 50, 111);
+    margin: 0;
+}
+
+.card-content p {
+    font-size: 30px;
+    color: rgb(255, 140, 0);
 }
 
 .card .card-content h1 {
@@ -125,6 +154,7 @@ html, body {
     max-width: 100px;
     float: right;
     padding-top: 8px;
+    object-fit: cover;
 }
 
 .form-container {
@@ -246,6 +276,7 @@ input[type=file] {
 .instituicoes-container .intituicoes-img-container img {
     height: 90px;
     width: 30%;
+    object-fit: scale-down;
 }
 
 .client-wrapper {
