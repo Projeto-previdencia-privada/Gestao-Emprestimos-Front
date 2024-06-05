@@ -1,17 +1,16 @@
 import {useState} from "react";
 
 function Upload() {
-    const [preview, setPreview] = useState(null);
+    const [preview, setPreview] = useState('') ;
     const [fileName, setFileName] = useState("Selecione o arquivo");
 
-    const onChange = (event) => {
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = new FileReader;
         file.onload = () => {
-            setFileName(event.target.files[0].name)
-            setPreview(file.result);
-            console.log(file.result);
+            setFileName(event.target.files![0].name)
+            setPreview(file.result as string);
         }
-        file.readAsDataURL(event.target.files[0]);
+        file.readAsDataURL(event.target.files![0]);
     }
 
     return (

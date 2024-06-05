@@ -1,6 +1,11 @@
-import {FormEvent, useState} from "react";
+import {useState} from "react";
 
-function ClientSearch( {setClientInfo, setCPF}) {
+type ClientSearchProps = {
+    setClientInfo: () => void
+    setCPF: (cpf: string) => void
+}
+
+function ClientSearch( {setClientInfo, setCPF}: ClientSearchProps) {
     const [checkInput, setCheckInput] = useState(false);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -8,15 +13,15 @@ function ClientSearch( {setClientInfo, setCPF}) {
 
         const formData = new FormData(event.currentTarget);
         const data = formData.get('cpf')
-        if(validateInputs(data)) {
+        if(validateInputs(String(data))) {
             setClientInfo();
-            setCPF(data);
+            setCPF(String(data));
         }
     }
 
     const validateInputs = (cpf: string) => {
 
-        if (cpf.length != 11 || isNaN(cpf)) {
+        if (cpf.length != 11 || isNaN(Number(cpf))) {
             setCheckInput(true);
             return false;
         }

@@ -1,4 +1,4 @@
-interface Instituicao {
+type Instituicao = {
     'cnpj': string
     'nome': string
 }

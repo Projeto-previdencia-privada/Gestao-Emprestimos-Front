@@ -1,13 +1,38 @@
-import Card from "../card/Card.tsx";
 import Tab from "../tab/Tab.tsx";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import Card from "../card/Card.tsx";
 
-function UserData( {cpf} ) {
+export type ClientInfo = {
+    "credito-disponivel": number
+    "renda-total": number
+    "credito-total": number
+}
+
+export type EmprestimosInfo = {
+    "id-emprestimo": string
+    "cpf": string
+    "valor-parcela": number
+    "qtd-parcelas": number
+    "status": string
+    "instituicao": string
+    "data-emprestimo": string
+}
+
+export type InstituicoesInfo = {
+    "nome": string
+    "cnpj": string
+}
+
+type UserDataProps = {
+    cpf: string
+}
+
+function UserData( {cpf} : UserDataProps ) {
     const [refresh, setRefresh] = useState(false);
-    const [clientInfo, setClientInfo] = useState([])
-    const [emprestimos, setEmprestimos] = useState([])
-    const [instituicoes, setInstituicoes] = useState([])
     const [dataFetched, setDataFetched] = useState(false)
+    const [clientInfo, setClientInfo] : [ClientInfo, React.Dispatch<React.SetStateAction<ClientInfo>>] = useState({"credito-disponivel": 0, "renda-total": 0, "credito-total": 0})
+    const [emprestimos, setEmprestimos] : [[EmprestimosInfo], React.Dispatch<React.SetStateAction<[EmprestimosInfo]>>] = useState([{"id-emprestimo": "0", "cpf": "00000000000000", "valor-parcela": 0, "qtd-parcelas": 0, "status": "Ativo", "instituicao": "instituicao", "data-emprestimo": "00/00/0000"}])
+    const [instituicoes, setInstituicoes] : [[InstituicoesInfo], React.Dispatch<React.SetStateAction<[InstituicoesInfo]>>] = useState([{nome: "nome", cnpj: "00000000000"}])
 
     async function fetchData() {
         let response = await fetch("http://" + import.meta.env.VITE_IP_MAQUINA_BACKEND + "/api/v1/emprestimos/" + cpf + "/info", {headers: {'Access-Control-Allow-Origin': 'http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND}} )

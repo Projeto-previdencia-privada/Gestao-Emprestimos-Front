@@ -13,7 +13,7 @@ function App() {
     return (
     <>
         <Header />
-        {clientInfo ? <UserData cpf={cpf} /> : <ClientSearch setClientInfo={() => setClientInfo(true)} setCPF={(cpf) => setCPF(cpf)} />}
+        {clientInfo ? <UserData cpf={cpf} /> : <ClientSearch setClientInfo={() => setClientInfo(true)} setCPF={(cpf: string) => setCPF(cpf)} />}
         <Footer />
     </>
   )

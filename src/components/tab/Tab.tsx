@@ -1,9 +1,16 @@
 import List from "../list/List.tsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Form from "../form/Form.tsx";
 import Instituicoes from "../instituicoes/Instituicoes.tsx";
+import {EmprestimosInfo, InstituicoesInfo} from "../user-data/UserData.tsx";
 
-function Tab({emprestimosInfo, instituicoesInfo, onContentChange}) {
+type TabProps = {
+    emprestimosInfo : EmprestimosInfo[]
+    instituicoesInfo : InstituicoesInfo[]
+    onContentChange : () => void
+}
+
+function Tab({emprestimosInfo, instituicoesInfo, onContentChange} : TabProps) {
     const [refresh, setRefresh] = useState(false);
 
     const formEmperstimos = [
@@ -40,8 +47,8 @@ function Tab({emprestimosInfo, instituicoesInfo, onContentChange}) {
                 {/*<br-tab-item title={"Conclusão de empréstimo"} id={'panel-4'} aria-label={"Conclusão de empréstimo"}>*/}
                 {/*</br-tab-item>*/}
 
-                <br-tab-item title={"Cadastrar instituição"} id={'panel-5'} aria-label={"Cadastrar instituição"} onClick={(event) => console.log(event)}>
-                    <Form form_fields={formInstituicoes} select_elements={{}} type={'instituicao'} onFormSubmit={() => setRefresh(true)} />
+                <br-tab-item title={"Cadastrar instituição"} id={'panel-5'} aria-label={"Cadastrar instituição"}>
+                    <Form form_fields={formInstituicoes} select_elements={[{cnpj: "00000000000000", nome: "instituicao"}]} type={'instituicao'} onFormSubmit={() => setRefresh(true)} />
                 </br-tab-item>
                 <br-tab-item title={"Instituições cadastradas"} id={'panel-6'} aria-label={"Instituições cadastradas"}>
                     <Instituicoes instituicoes_info={instituicoesInfo} />
