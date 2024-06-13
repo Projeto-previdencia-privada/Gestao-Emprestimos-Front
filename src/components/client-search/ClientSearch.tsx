@@ -3,9 +3,11 @@ import {useState} from "react";
 type ClientSearchProps = {
     setClientInfo: () => void
     setCPF: (cpf: string) => void
+    setError: () => void
+    isError: boolean
 }
 
-function ClientSearch( {setClientInfo, setCPF}: ClientSearchProps) {
+function ClientSearch( {setClientInfo, setCPF, isError, setError}: ClientSearchProps) {
     const [checkInput, setCheckInput] = useState(false);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -17,6 +19,8 @@ function ClientSearch( {setClientInfo, setCPF}: ClientSearchProps) {
             setClientInfo();
             setCPF(String(data));
         }
+        setError()
+        message.message = "Campo 'CPF'possui valor inválido"
     }
 
     const validateInputs = (cpf: string) => {
@@ -28,10 +32,14 @@ function ClientSearch( {setClientInfo, setCPF}: ClientSearchProps) {
         return true
     }
 
+    const message = {state:'danger', title:'Erro. ', message:"Campo 'CPF'possui valor inválido"}
+    if(isError) {
+        message.message = "CPF não encontrado"
+    }
     return (
         <div className={'client-wrapper'}>
             <div className={'client-container'}>
-                {checkInput ? <br-message state={'danger'} closable inline title={'Erro. '} show-icon onClick={() => setCheckInput(false)}>Campo 'CPF'possui valor inválido</br-message> : <></>}
+                {checkInput || isError ? <br-message state={message.state} closable inline title={message.title} show-icon onClick={() => setCheckInput(false)}>{message.message}</br-message> : <></>}
                 <div className={'client-form'}>
                     <form onSubmit={handleSubmit}>
                         <div className="br-input">

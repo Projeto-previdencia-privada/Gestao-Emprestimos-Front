@@ -25,9 +25,10 @@ export type InstituicoesInfo = {
 
 type UserDataProps = {
     cpf: string
+    setError: () => void
 }
 
-function UserData( {cpf} : UserDataProps ) {
+function UserData( {cpf, setError} : UserDataProps ) {
     const [refresh, setRefresh] = useState(false);
     const [dataFetched, setDataFetched] = useState(false)
     const [clientInfo, setClientInfo] : [ClientInfo, React.Dispatch<React.SetStateAction<ClientInfo>>] = useState({"credito-disponivel": 0, "renda-total": 0, "credito-total": 0})
@@ -36,6 +37,9 @@ function UserData( {cpf} : UserDataProps ) {
 
     async function fetchData() {
         let response = await fetch("http://" + import.meta.env.VITE_IP_MAQUINA_BACKEND + "/api/v1/emprestimos/" + cpf + "/info", {headers: {'Access-Control-Allow-Origin': 'http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND}} )
+        if(!response.ok) {
+            setError()
+        }
         let data = await response.json()
         setClientInfo(data)
 
