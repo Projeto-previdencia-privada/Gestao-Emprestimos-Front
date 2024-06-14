@@ -7,15 +7,15 @@ function Footer() {
             items: [
                 {
                     title: 'Gestão de Benefícios',
-                    href: '#'
+                    href: '192.168.37.8:5300'
                 },
                 {
                     title: 'Gestão de Contribuições',
-                    href: '#'
+                    href: '192.168.37.8:3000'
                 },
                 {
                     title: 'Gestão de Contribuíntes',
-                    href: '#'
+                    href: '192.168.37.8:8090'
                 }
             ]
         }
