@@ -16,7 +16,7 @@ function Tab({emprestimosInfo, instituicoesInfo, onContentChange, cpf} : TabProp
 
     const formEmperstimos = [
         {label: 'CPF' , placeholder: 'Digite o CPF do cliente', name:'cpf', readOnly: true, value: cpf},
-        {label: 'Valor da parcela', placeholder: 'Digite o valor da parcela do empréstimo', name:'valor-parcela', readOnly: false, value: ''},
+        {label: 'Valor do empréstimo', placeholder: 'Digite o valor do empréstimo', name:'valor-parcela', readOnly: false, value: ''},
         {label: 'Quantidade de parcelas', placeholder: 'Digite a quantidade de parcelas do empréstimo', name: 'qtd-parcelas', readOnly: false, value: ''}
     ]
 
