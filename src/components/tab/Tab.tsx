@@ -8,15 +8,16 @@ type TabProps = {
     emprestimosInfo : EmprestimosInfo[]
     instituicoesInfo : InstituicoesInfo[]
     onContentChange : () => void
+    cpf : string
 }
 
-function Tab({emprestimosInfo, instituicoesInfo, onContentChange} : TabProps) {
+function Tab({emprestimosInfo, instituicoesInfo, onContentChange, cpf} : TabProps) {
     const [refresh, setRefresh] = useState(false);
 
     const formEmperstimos = [
-        {label: 'CPF' , placeholder: 'Digite o CPF do cliente', name:'cpf'},
-        {label: 'Valor da parcela', placeholder: 'Digite o valor da parcela do empréstimo', name:'valor-parcela'},
-        {label: 'Quantidade de parcelas', placeholder: 'Digite a quantidade de parcelas do empréstimo', name: 'qtd-parcelas'}
+        {label: 'CPF' , placeholder: 'Digite o CPF do cliente', name:'cpf', readOnly: true, value: cpf},
+        {label: 'Valor da parcela', placeholder: 'Digite o valor da parcela do empréstimo', name:'valor-parcela', readOnly: false, value: ''},
+        {label: 'Quantidade de parcelas', placeholder: 'Digite a quantidade de parcelas do empréstimo', name: 'qtd-parcelas', readOnly: false, value: ''}
     ]
 
     const formInstituicoes = [

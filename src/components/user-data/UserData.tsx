@@ -64,7 +64,7 @@ function UserData( {cpf, setError} : UserDataProps ) {
     return (
         <>
             { dataFetched ? <Card clientInfo={clientInfo} /> : <p>loading</p>}
-            { dataFetched ? <Tab  emprestimosInfo={emprestimos} instituicoesInfo={instituicoes} onContentChange={() => setRefresh(true)} /> : <p>loading</p> }
+            { dataFetched ? <Tab  cpf={cpf} emprestimosInfo={emprestimos} instituicoesInfo={instituicoes} onContentChange={() => setRefresh(true)} /> : <p>loading</p> }
         </>
     )
 }

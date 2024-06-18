@@ -6,6 +6,8 @@ type FormFields = {
     label: string
     placeholder: string
     name: string
+    readOnly: boolean
+    value: string
 }
 
 type Message = {
@@ -138,7 +140,7 @@ function Form( {select_elements, form_fields, type, onFormSubmit}: FormProps ) {
                                 <div className="br-input">
                                     <label htmlFor="input-default">{field['label']}</label>
                                     <input id="input-default" type="text" placeholder={field['placeholder']}
-                                           name={field['name']}/>
+                                           name={field['name']} readOnly={field['readOnly']} value={field['value']}/>
                                 </div>
                             ))}
 
