@@ -21,8 +21,8 @@ function Tab({emprestimosInfo, instituicoesInfo, onContentChange, cpf} : TabProp
     ]
 
     const formInstituicoes = [
-        {label: 'CNPJ', placeholder: 'Digite o CNPJ da instituição', name:'cnpj'},
-        {label: 'Nome da instituição', placeholder: 'Digite o nome da instituição', name:'nome'}
+        {label: 'CNPJ', placeholder: 'Digite o CNPJ da instituição', name:'cnpj', readOnly: false, value: ''},
+        {label: 'Nome da instituição', placeholder: 'Digite o nome da instituição', name:'nome', readOnly: false, value: ''}
     ]
 
     if(refresh) {

@@ -34,20 +34,20 @@ function Form( {select_elements, form_fields, type, onFormSubmit}: FormProps ) {
 
         if (cpf.length != 11 || isNaN(Number(cpf))) {
             setMessage({state: 'danger', title:'Erro. ', message: "Campo 'CPF' contém um valor inválido"})
-            return;
+            return false;
         }
 
         if (isNaN(valorParcela) || valorParcela < 1) {
             setMessage({state: 'danger', title:'Erro. ', message: "Campo 'Valor da parcela' contém um valor inválido"})
-            return;
+            return false;
         }
 
         if (isNaN(qtdParcelas) || !Number.isInteger(Number(qtdParcelas))) {
             setMessage({state: 'danger', title:'Erro. ', message: "Campo 'Quantidade de parcelas' contém um valor inválido"})
-            return;
+            return false;
         }
 
-        return setMessage({state: 'success', title:'Sucesso. ', message: 'Empréstimo cadastrado com sucesso'})
+        return true;
     }
 
     const validadeInstituicaoInputs = (data: {[p: string]: FormDataEntryValue}) => {
@@ -65,20 +65,32 @@ function Form( {select_elements, form_fields, type, onFormSubmit}: FormProps ) {
 
         const formData = new FormData(event.currentTarget);
         const data = Object.fromEntries(formData);
-        validadeInputs(data)
         async function sendRequest() {
             const request = await fetch('http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND + '/api/v1/emprestimos', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
             })
-
+            if(!request.ok) {
+                return ''
+            }
             return request.json();
         }
-        sendRequest().then( () => {
-            onFormSubmit();
-        });
-        event.currentTarget.reset();
+        if(validadeInputs(data)) {
+            sendRequest().then((result) => {
+                if (result === '') {
+                    setMessage({
+                        state: 'danger',
+                        title: "Erro. ",
+                        message: "Valor do empréstimo excede o total de crédito disponível"
+                    })
+                } else {
+                    setMessage({state: 'success', title: 'Sucesso. ', message: 'Empréstimo cadastrado com sucesso'})
+                }
+                onFormSubmit();
+            });
+            event.currentTarget.reset();
+        }
         setSubmit(true);
     };
 
@@ -136,13 +148,21 @@ function Form( {select_elements, form_fields, type, onFormSubmit}: FormProps ) {
                     >{message['message']}</br-message> : <></>}
                     <form action={'http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND + '/api/v1/emprestimos'} method={'POST'} onSubmit={onSubmit}>
                         <div className="col-sm-8 col-lg-5">
-                            {form_fields.map((field) => (
+                            {form_fields.map((field) => field.readOnly ? (
                                 <div className="br-input">
                                     <label htmlFor="input-default">{field['label']}</label>
                                     <input id="input-default" type="text" placeholder={field['placeholder']}
                                            name={field['name']} readOnly={field['readOnly']} value={field['value']}/>
                                 </div>
-                            ))}
+                            ) :
+                                (
+                                    <div className="br-input">
+                                        <label htmlFor="input-default">{field['label']}</label>
+                                        <input id="input-default" type="text" placeholder={field['placeholder']}
+                                               name={field['name']} readOnly={field['readOnly']} />
+                                    </div>
+                                )
+                            )}
 
                             <div className={'form-select'}>
                                 <label className={'form-label'}>Instituição</label>
