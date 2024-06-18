@@ -47,7 +47,7 @@ function ClientSearch( {setClientInfo, setCPF, isError, setError}: ClientSearchP
                             <input id="input-default" type="text" placeholder={'Digite o CPF do cliente'} name={'cpf'}/>
                         </div>
                         <div className="form-button">
-                            <button className="br-button primary mr-3">Cadastrar</button>
+                            <button className="br-button primary mr-3">Buscar</button>
                         </div>
                     </form>
                 </div>
