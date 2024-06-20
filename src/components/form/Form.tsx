@@ -65,9 +65,6 @@ function Form( {select_elements, form_fields, type, onFormSubmit}: FormProps ) {
 
         const formData = new FormData(event.currentTarget);
         const data = Object.fromEntries(formData);
-        data['valor-parcela'] = String(Number(data['valor-parcela']) * Number(data['qtd-parcelas']));
-        console.log(data)
-        console.log(Number(data['valor-parcela']) / Number(data['qtd-parcelas']))
         async function sendRequest() {
             const request = await fetch('http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND + '/api/v1/emprestimos', {
                 method: 'POST',
