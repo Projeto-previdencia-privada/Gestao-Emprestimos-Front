@@ -35,7 +35,7 @@ function Header() {
 
     useEffect(() => {
         if(titleRef.current !== undefined) {
-            titleRef.current.addEventListener('title-link-click', () => location.href = 'https://' + import.meta.env.VITE_IP_MAQUINA_HOME)
+            titleRef.current.addEventListener('title-link-click', () => location.href = 'http://' + import.meta.env.VITE_IP_MAQUINA_HOME)
         } else {
             console.error('Unable to get reference to Header')
         }
