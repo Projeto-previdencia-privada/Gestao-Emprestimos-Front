@@ -5,8 +5,10 @@
 html, body {
 
 }
-.br-footer {
-    height: 100vh;
+
+footer {
+    position: fixed;
+    width: 100%;
 }
 
 .br-card .card-content {
@@ -187,7 +189,6 @@ html, body {
     border-radius: 4px;
     height: 40px;
     padding-left: 16px;
-    margin-bottom: 50px;
     font-size: 14px;
     font-weight: 600;
     line-height: 1.45;

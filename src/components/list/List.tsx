@@ -28,8 +28,7 @@ function List({elements_list, instituicoes_list} : ListProps) {
                             <div className={'li-container'}>
                                 <div className={'info-user'}>
                                     <p>CPF: <span>{valor['cpf']}</span></p>
-                                    <p>Valor do
-                                        empréstimo: <span>R$ {Number(valor['valor-parcela']).toFixed(2)}</span>
+                                    <p>Valor da parcela: <span>R$ {Number(valor['valor-parcela']).toFixed(2)}</span>
                                     </p>
                                     <p>Quantidade de parcelas: <span>{valor['qtd-parcelas']}</span></p>
                                 </div>

@@ -61,6 +61,7 @@ function Footer() {
     }
 
     return (
+        <footer>
             <br-footer
                 text={"Texto destinado a exibição de informações relacionadas à licença de uso"}
                 logo={JSON.stringify(logo)}
@@ -69,6 +70,7 @@ function Footer() {
             >
 
             </br-footer>
+        </footer>
 
     )
 }

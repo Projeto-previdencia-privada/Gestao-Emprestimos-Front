@@ -149,29 +149,41 @@ function Form( {select_elements, form_fields, type, onFormSubmit}: FormProps ) {
                     <form action={'http://' + import.meta.env.VITE_IP_MAQUINA_BACKEND + '/api/v1/emprestimos'} method={'POST'} onSubmit={onSubmit}>
                         <div className="col-sm-8 col-lg-5">
                             {form_fields.map((field) => field.readOnly ? (
-                                <div className="br-input">
-                                    <label htmlFor="input-default">{field['label']}</label>
-                                    <input id="input-default" type="text" placeholder={field['placeholder']}
-                                           name={field['name']} readOnly={field['readOnly']} value={field['value']}/>
-                                </div>
-                            ) :
-                                (
-                                    <div className="br-input">
-                                        <label htmlFor="input-default">{field['label']}</label>
-                                        <input id="input-default" type="text" placeholder={field['placeholder']}
-                                               name={field['name']} readOnly={field['readOnly']} />
-                                    </div>
-                                )
+                                        <div className="br-input">
+                                            <label htmlFor="input-default">{field['label']}</label>
+                                            <input id="input-default" type="text" placeholder={field['placeholder']}
+                                                   name={field['name']} readOnly={field['readOnly']} value={field['value']}/>
+                                        </div>
+                                    ) :
+                                    (
+                                        <div className="br-input">
+                                            <label htmlFor="input-default">{field['label']}</label>
+                                            <input id="input-default" type="text" placeholder={field['placeholder']}
+                                                   name={field['name']} readOnly={field['readOnly']}/>
+                                        </div>
+                                    )
                             )}
-
-                            <div className={'form-select'}>
-                                <label className={'form-label'}>Instituição</label>
-                                <select className={'form-options'} name={'cnpj'}>
-                                    <option value={''} selected hidden>Selecione uma instituição</option>
-                                    {select_elements.map((element) => (
-                                        <option value={element['cnpj']}>{element['nome']}</option>
-                                    ))}
+                            <div className={'br-input'}>
+                                <label className={'form-label'}>Quantidade de parcelas</label>
+                                <select className={'form-options'} name={'qtd-parcelas'}>
+                                    <option value={''} selected hidden>Selecione a quantidade de parcelas</option>
+                                    <option value={'4'}>4</option>
+                                    <option value={'8'}>8</option>
+                                    <option value={'12'}>12</option>
+                                    <option value={'24'}>24</option>
+                                    <option value={'36'}>36</option>
                                 </select>
+                            </div>
+                            <div className={'br-input'} >
+                                <div className={'form-select'}>
+                                    <label className={'form-label'}>Instituição</label>
+                                    <select className={'form-options'} name={'cnpj'}>
+                                        <option value={''} selected hidden>Selecione uma instituição</option>
+                                        {select_elements.map((element) => (
+                                            <option value={element['cnpj']}>{element['nome']}</option>
+                                        ))}
+                                    </select>
+                                </div>
                             </div>
 
                         </div>
