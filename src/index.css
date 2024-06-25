@@ -6,11 +6,6 @@ html, body {
 
 }
 
-footer {
-    position: fixed;
-    width: 100%;
-}
-
 .br-card .card-content {
     width: 100vw;
     background-color: red;
