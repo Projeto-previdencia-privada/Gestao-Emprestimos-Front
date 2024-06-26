@@ -14,10 +14,11 @@ function ClientSearch( {setClientInfo, setCPF, isError, setError}: ClientSearchP
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
-        const data = formData.get('cpf')
-        if(validateInputs(String(data))) {
+        let data = formData.get('cpf')
+        data = String(data).trim()
+        if(validateInputs(data)) {
             setClientInfo();
-            setCPF(String(data));
+            setCPF(data);
         }
         setError()
         message.message = "Campo 'CPF'possui valor inválido"
